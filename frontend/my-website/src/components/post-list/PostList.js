@@ -28,7 +28,7 @@ class PostList extends React.Component {
 			postsPerPage: this.state.postsPerPage,
 			postList: data,
 			postCount: count,
-			page: this.state.page,
+			page: page,
 		})
 	}
 
@@ -38,38 +38,36 @@ class PostList extends React.Component {
 		if (list) {
 			for (let i = 0; i < list.length; i++) {
 				elements.push(
-					<Post post={list[i]} />
+					<Post key={list[i].id} post={list[i]} />
 				);
 				elements.push(<hr />);
 			}
 		}
 
-		const pageNumber = Math.floor(this.state.postCount / this.state.postsPerPage) + 1;
-		
+		//const pageNumber = Math.floor(this.state.postCount / this.state.postsPerPage) + 1;
+		const pageNumber = 5;
 
 		return (
 			<div className="postList">
 				{elements}
 
 				<div className="pagination">
-					
-				</div>
-
-				<div className="pagination">
 					<Pagination>
 						<Pagination.First />
 						<Pagination.Prev />
-						<Pagination.Item>{1}</Pagination.Item>
-						<Pagination.Ellipsis />
-
-						<Pagination.Item>{10}</Pagination.Item>
-						<Pagination.Item>{11}</Pagination.Item>
-						<Pagination.Item>{12}</Pagination.Item>
-						<Pagination.Item>{13}</Pagination.Item>
-						<Pagination.Item>{14}</Pagination.Item>
-
-						<Pagination.Ellipsis />
-						<Pagination.Item>{20}</Pagination.Item>
+						{pageNumber <= 5 ?
+							Array.from(Array(pageNumber).keys()).map((_, x) => {
+								return (
+									<Pagination.Item
+										key={x + 1}
+										onClick={() => this.handlePaginationClick(x + 1)}
+										active={this.state.page === x + 1}
+									>
+										{x + 1}
+									</Pagination.Item>
+								);
+							})
+						: null}
 						<Pagination.Next />
 						<Pagination.Last />
 					</Pagination>
