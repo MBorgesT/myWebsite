@@ -14,6 +14,7 @@ class PostList extends React.Component {
 			postList: [],
 			postCount: 0,
 			page: 1,
+			numberOfPages: 1,
 		};
 	}
 
@@ -22,14 +23,23 @@ class PostList extends React.Component {
 	}
 
 	async handlePaginationClick(page) {
-		const data = await PostListStore.getPosts(this.state.postsPerPage, page);
-		const count = await PostListStore.getPostCount();
+		let data, count;
+		try {
+			data = await PostListStore.getPosts(this.state.postsPerPage, page);
+			count = await PostListStore.getPostCount();
+		} catch (e) {
+			console.log(e);
+			return;
+		}
+
+		const numberOfPages = Math.floor(count / this.state.postsPerPage) + 1;
 		this.setState({
 			postsPerPage: this.state.postsPerPage,
 			postList: data,
 			postCount: count,
 			page: page,
-		})
+			numberOfPages: numberOfPages,
+		});
 	}
 
 	render() {
@@ -44,8 +54,114 @@ class PostList extends React.Component {
 			}
 		}
 
-		//const pageNumber = Math.floor(this.state.postCount / this.state.postsPerPage) + 1;
-		const pageNumber = 5;
+		let pagItems = []
+		if (this.state.numberOfPages <= 5) {
+			for (let i = 1; i <= this.state.numberOfPages; i++) {
+				pagItems.push(
+					<Pagination.Item
+						key={i}
+						onClick={() => this.handlePaginationClick(i)}
+						active={this.state.page === i}
+					>
+						{i}
+					</Pagination.Item>
+				)
+			}
+		} else if (this.state.page <= 3) {
+			for (let i = 1; i <= 4; i++) {
+				pagItems.push(
+					<Pagination.Item
+						key={i}
+						onClick={() => this.handlePaginationClick(i)}
+						active={this.state.page === i}
+					>
+						{i}
+					</Pagination.Item>
+				)
+			}
+
+			pagItems.push(<Pagination.Ellipsis />)
+			pagItems.push(
+				<Pagination.Item
+					key={this.state.numberOfPages}
+					onClick={() => this.handlePaginationClick(this.state.numberOfPages)}
+					active={this.state.page === this.state.numberOfPages}
+				>
+					{this.state.numberOfPages}
+				</Pagination.Item>
+			)
+		} else if (this.state.page >= this.state.numberOfPages - 2) {
+			pagItems.push(
+				<Pagination.Item
+					key={1}
+					onClick={() => this.handlePaginationClick(1)}
+					active={this.state.page === 1}
+				>
+					{1}
+				</Pagination.Item>
+			)
+			pagItems.push(<Pagination.Ellipsis />)
+
+			for (let i = this.state.numberOfPages - 3; i <= this.state.numberOfPages; i++) {
+				pagItems.push(
+					<Pagination.Item
+						key={i}
+						onClick={() => this.handlePaginationClick(i)}
+						active={this.state.page === i}
+					>
+						{i}
+					</Pagination.Item>
+				)
+			}
+		} else {
+			pagItems.push(
+				<Pagination.Item
+					key={1}
+					onClick={() => this.handlePaginationClick(1)}
+					active={this.state.page === 1}
+				>
+					{1}
+				</Pagination.Item>
+			)
+			pagItems.push(<Pagination.Ellipsis />)
+
+			pagItems.push(
+				<Pagination.Item
+					key={this.state.page - 1}
+					onClick={() => this.handlePaginationClick(this.state.page - 1)}
+				>
+					{this.state.page - 1}
+				</Pagination.Item>
+			)
+			pagItems.push(
+				<Pagination.Item
+					key={this.state.page}
+					active
+				>
+					{this.state.page}
+				</Pagination.Item>
+			)
+			pagItems.push(
+				<Pagination.Item
+					key={this.state.page + 1}
+					onClick={() => this.handlePaginationClick(this.state.page + 1)}
+				>
+					{this.state.page + 1}
+				</Pagination.Item>
+			)
+
+			pagItems.push(<Pagination.Ellipsis />)
+			pagItems.push(
+				<Pagination.Item
+					key={this.state.numberOfPages}
+					onClick={() => this.handlePaginationClick(this.state.numberOfPages)}
+					active={this.state.page === this.state.numberOfPages}
+				>
+					{this.state.numberOfPages}
+				</Pagination.Item>
+			)
+
+		}
 
 		return (
 			<div className="postList">
@@ -53,23 +169,9 @@ class PostList extends React.Component {
 
 				<div className="pagination">
 					<Pagination>
-						<Pagination.First />
 						<Pagination.Prev />
-						{pageNumber <= 5 ?
-							Array.from(Array(pageNumber).keys()).map((_, x) => {
-								return (
-									<Pagination.Item
-										key={x + 1}
-										onClick={() => this.handlePaginationClick(x + 1)}
-										active={this.state.page === x + 1}
-									>
-										{x + 1}
-									</Pagination.Item>
-								);
-							})
-						: null}
+						{pagItems}
 						<Pagination.Next />
-						<Pagination.Last />
 					</Pagination>
 				</div>
 			</div>
