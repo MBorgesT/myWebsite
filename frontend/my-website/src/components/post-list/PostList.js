@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from '../post/Post';
-import PostListStore from '../../stores/PostListStore';
+import PostStore from '../../stores/PostStore';
 import { Pagination } from 'react-bootstrap';
 import './PostList.css'
 
@@ -25,8 +25,8 @@ class PostList extends React.Component {
 	async handlePaginationClick(page) {
 		let data, count;
 		try {
-			data = await PostListStore.getPosts(this.state.postsPerPage, page);
-			count = await PostListStore.getPostCount();
+			data = await PostStore.getPosts(this.state.postsPerPage, page);
+			count = await PostStore.getPostCount();
 		} catch (e) {
 			console.log(e);
 			return;
