@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
+import './MyPagination.css';
 
 class MyPagination extends React.Component {
 

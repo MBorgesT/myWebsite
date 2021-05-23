@@ -1,8 +1,7 @@
 import React from 'react';
 import Post from '../post/Post';
-import PostStore from '../../stores/PostStore';
+import PostStore from '../../../stores/PostStore';
 import './PostList.css'
-
 import MyPagination from '../pagination/MyPagination';
 
 class PostList extends React.Component {

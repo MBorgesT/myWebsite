@@ -1,14 +1,16 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Frontpage from './components/frontpage/Frontpage';
+import PostlistPage from './components/post-list-page/PostlistPage';
 import Header from './components/header/Header';
 
 function App() {
 	return (
-		<div className="app">
+		<div>
 			<Header />
-			<Frontpage />
+			<div className='content'>
+				<PostlistPage />
+			</div>
 		</div>
 	);
 }

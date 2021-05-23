@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 class PostListStore {
 	static async getPosts(postsPerPage, page) {
 		try {

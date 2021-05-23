@@ -1,0 +1,13 @@
+.contact {
+    font-size: 24px;
+    padding-top: 16px;
+}
+
+.link-list {
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.link {
+    padding-right: 18px;
+}

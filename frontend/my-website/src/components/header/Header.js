@@ -6,7 +6,7 @@ class Header extends React.Component {
         return (
             <div>
                 <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                    <Navbar.Brand href="#home">Generic Blog</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#features">Features</Nav.Link>
