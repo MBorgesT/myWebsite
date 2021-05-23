@@ -8,7 +8,7 @@ class Post extends React.Component {
         super(props);
 
         const post = this.props.post;
-        this.state = {
+        this.parentState = {
             title: post.title,
             date: post.date,
             topic: post.topic_name,
@@ -19,14 +19,14 @@ class Post extends React.Component {
     render() {
         return (
             <div className="post">
-                <div className="title">{this.state.title}</div>
+                <div className="title">{this.parentState.title}</div>
                 <div className="date">
-                    {this.state.date}
+                    {this.parentState.date}
                     {' '}
-                    <Badge variant="secondary">{this.state.topic}</Badge>
+                    <Badge variant="secondary">{this.parentState.topic}</Badge>
                 </div>
                 <div className="margin" />
-                <div className="body">{this.state.body}</div>
+                <div className="body">{this.parentState.body}</div>
             </div>
         );
     }
