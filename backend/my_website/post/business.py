@@ -36,3 +36,9 @@ def insert(request_body):
         raise Exception(serializer.errors)
 
     return serializer.data
+
+
+def get_posts_by_topic(topic_id):
+    posts = Post.objects.filter(topic_id=topic_id)
+    serializer = PostSerializer(posts, many=True)
+    return serializer.data
