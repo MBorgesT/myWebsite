@@ -3,7 +3,7 @@ import axios from 'axios';
 class PostListStore {
 	static async getPosts(postsPerPage, page) {
 		try {
-			const promise = await axios.post('http://localhost:8000/api/posts/get_post_page/', {
+			const promise = await axios.post('http://localhost:8000/api/post/get_post_page/', {
 				posts_per_page: postsPerPage,
 				page: page
 			})
@@ -16,7 +16,7 @@ class PostListStore {
 
 	static async getPostCount() {
 		try {
-			const promise = await axios.get('http://localhost:8000/api/posts/get_post_count/');
+			const promise = await axios.get('http://localhost:8000/api/post/get_post_count/');
 			const count = parseInt(promise.data);
 			return count;
 		} catch (e) {
