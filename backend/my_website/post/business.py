@@ -11,7 +11,7 @@ def get_post_page(request_body):
 
     start = posts_per_page * (page - 1)
     end = start + posts_per_page
-    posts = Post.objects.order_by('-id')[start:end]
+    posts = Post.objects.order_by('-date')[start:end]
 
     serializer = PostSerializer(posts, many=True)
     return serializer.data
@@ -22,7 +22,7 @@ def get_post_count():
 
 
 def get_all():
-    all_posts = Post.objects.all()
+    all_posts = Post.objects.all().order_by('-date')
     serializer = PostSerializer(all_posts, many=True)
     return serializer.data
 
@@ -39,6 +39,6 @@ def insert(request_body):
 
 
 def get_posts_by_topic(topic_id):
-    posts = Post.objects.filter(topic_id=topic_id)
+    posts = Post.objects.filter(topic_id=topic_id).order_by('-date')
     serializer = PostSerializer(posts, many=True)
     return serializer.data
