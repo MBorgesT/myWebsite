@@ -1,13 +1,5 @@
 from django.db import models
-from django.utils import timezone
-import datetime
-
-
-class Topic(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
+from topic.models import Topic
 
 
 class Post(models.Model):

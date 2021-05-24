@@ -1,6 +1,5 @@
 from .models import Post
 from .serializers import PostSerializer
-from django.db.models import Count
 import json
 
 

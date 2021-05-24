@@ -5,13 +5,14 @@ URL = 'https://jsonplaceholder.typicode.com/posts'
 r = requests.get(url=URL)
 data = r.json()
 
-URL = 'http://localhost:8000/api/posts/'
+URL = 'http://localhost:8000/api/post/'
 
 first_day = datetime.datetime.now() - datetime.timedelta(days = 120)
 
 
 def get_date_text(date):
     return date.strftime('%d/%m/%Y')
+
 
 flag = 0
 

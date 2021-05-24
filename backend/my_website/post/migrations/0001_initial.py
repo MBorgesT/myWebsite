@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=511)),
                 ('body', models.TextField()),
                 ('date', models.DateField()),
-                ('topic', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='api.topic')),
+                ('topic', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='post.topic')),
             ],
         ),
     ]
