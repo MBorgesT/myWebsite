@@ -27,7 +27,7 @@ export default class PostListPage extends React.Component {
         this.selectPage(1);
     }
 
-    async selectPage(pageIndex) {
+    async selectPage(pageIndex, scrollToRef) {
         let upperLimit = this.state.postListModel == null ? true : pageIndex <= this.state.postListModel.numberOfPages;
         if (upperLimit && pageIndex > 0) {
             let data, count;
@@ -43,6 +43,10 @@ export default class PostListPage extends React.Component {
             this.setState({
                 postListModel: new PostListModel(data, count, pageIndex, numberOfPages)
             });
+
+            if (scrollToRef != null) {
+                window.scrollTo(0, scrollToRef.current.offsetTop);
+            }
         }
     }
 

@@ -11,8 +11,7 @@ class MyPagination extends React.Component {
     }
 
     selectPage(pageIndex) {
-        this.props.selectPage(pageIndex);
-        window.scrollTo(0, this.paginationRef.current.offsetTop);
+        this.props.selectPage(pageIndex, this.paginationRef);
     }
 
     render() {
@@ -127,7 +126,7 @@ class MyPagination extends React.Component {
         }
 
         return (
-            <div className="pagination" ref={this.paginationRef}>
+            <div className='pagination' ref={this.paginationRef}>
                 <Pagination>
                     <Pagination.Prev onClick={() => this.selectPage(postListModel.pageIndex - 1)} />
                     {pagItems}
