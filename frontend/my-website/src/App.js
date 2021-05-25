@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import PostlistPage from './components/post-list-page/PostlistPage';
+import PostListPage from './components/post-list-page/PostListPage';
 import Header from './components/header/Header';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 		<div>
 			<Header />
 			<div className='content'>
-				<PostlistPage />
+				<PostListPage />
 			</div>
 		</div>
 	);

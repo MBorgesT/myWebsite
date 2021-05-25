@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 class PostListStore {
-	static async getPosts(postsPerPage, page) {
+
+	static async getPostPage(postsPerPage, page) {
 		try {
 			const promise = await axios.post('http://localhost:8000/api/post/get_post_page/', {
 				posts_per_page: postsPerPage,
@@ -23,6 +24,7 @@ class PostListStore {
 			throw e;
 		}
 	}
+
 }
 
 
