@@ -51,3 +51,12 @@ def get_post_page_by_topic(request_body):
 
     serializer = PostSerializer(posts, many=True)
     return serializer.data
+
+
+def get_post_count_by_topic(request_body):
+    parsed_data = json.loads(request_body)
+
+    topic_id = parsed_data['topic_id']
+    count = Post.objects.filter(topic_id=topic_id).count()
+
+    return count

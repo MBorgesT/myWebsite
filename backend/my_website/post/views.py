@@ -32,7 +32,9 @@ def get_post_count(request):
 
 @api_view(['POST'])
 def get_post_page_by_topic(request):
-    try:
-        return Response(business.get_posts_by_topic(request.body))
-    except Exception as e:
-        return Response(e.__str__())
+    return Response(business.get_post_page_by_topic(request.body))
+
+
+@api_view(['POST'])
+def get_post_count_by_topic(request):
+    return Response(business.get_post_count_by_topic(request.body))

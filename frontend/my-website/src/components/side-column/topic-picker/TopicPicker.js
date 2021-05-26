@@ -10,6 +10,7 @@ export default class TopicPicker extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.getTopics();
     }
 
@@ -29,7 +30,16 @@ export default class TopicPicker extends React.Component {
 
     render() {
         let elements = []
-        if (this.state != null) {
+        if (this.state != null && this.state.topics != null) {
+            elements.push(
+                <ListGroup.Item
+                    action
+                    id={-1}
+                >
+                    All
+                </ListGroup.Item>
+            );
+
             for (let i = 0; i < this.state.topics.length; i++) {
                 elements.push(
                     <ListGroup.Item
@@ -46,7 +56,7 @@ export default class TopicPicker extends React.Component {
             <div>
                 <div className='title'>Topics</div>
                 <ListGroup>
-                {elements}
+                    {elements}
                 </ListGroup>
             </div>
         );
