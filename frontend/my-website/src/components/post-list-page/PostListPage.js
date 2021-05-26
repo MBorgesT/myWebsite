@@ -31,9 +31,10 @@ export default class PostListPage extends React.Component {
         let upperLimit = this.state.postListModel == null ? true : pageIndex <= this.state.postListModel.numberOfPages;
         if (upperLimit && pageIndex > 0) {
             let data, count;
+            let postStore = new PostStore();
             try {
-                data = await PostStore.getPostPage(this.state.postsPerPage, pageIndex);
-                count = await PostStore.getPostCount();
+                data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
+                count = await postStore.getPostCount();
             } catch (e) {
                 console.log(e);
                 return;
@@ -68,7 +69,7 @@ export default class PostListPage extends React.Component {
         return (
             <div>
                 <Container>
-                    <Row className="justify-content-md-center">
+                    <Row>
                         <Col sm={12} md={12} lg={8}>
                             {content}
                         </Col>

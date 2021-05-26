@@ -1,0 +1,16 @@
+.title {
+    font-size: 24px;
+    padding-top: 24px;
+    padding-bottom: 16px;
+}
+
+.topics{
+    padding-top: 16px;
+    padding-left: 24px;
+    font-size: 18px;
+    color: #3273a6;
+}
+
+.topic {
+    padding-bottom: 6px;
+}

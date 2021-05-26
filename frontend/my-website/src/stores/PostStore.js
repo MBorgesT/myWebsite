@@ -1,10 +1,17 @@
 import axios from 'axios';
 
-class PostListStore {
+import AbstractStore from './AbstractStore';
 
-	static async getPostPage(postsPerPage, page) {
+export default class PostListStore extends AbstractStore {
+
+	constructor() {
+		super();
+		this.apiUrl = this.backendUrl + 'post/';
+	}
+
+	async getPostPage(postsPerPage, page) {
 		try {
-			const promise = await axios.post('http://localhost:8000/api/post/get_post_page/', {
+			const promise = await axios.post( this.apiUrl + 'get_post_page/', {
 				posts_per_page: postsPerPage,
 				page: page
 			})
@@ -15,9 +22,9 @@ class PostListStore {
 		}
 	}
 
-	static async getPostCount() {
+	async getPostCount() {
 		try {
-			const promise = await axios.get('http://localhost:8000/api/post/get_post_count/');
+			const promise = await axios.get( this.apiUrl + 'get_post_count/');
 			const count = parseInt(promise.data);
 			return count;
 		} catch (e) {
@@ -26,6 +33,3 @@ class PostListStore {
 	}
 
 }
-
-
-export default PostListStore;
