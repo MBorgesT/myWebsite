@@ -31,8 +31,8 @@ def get_post_count(request):
 
 
 @api_view(['POST'])
-def get_posts_by_topic(request):
+def get_post_page_by_topic(request):
     try:
-        return Response(business.get_posts_by_topic(request.data['topic_id']))
+        return Response(business.get_posts_by_topic(request.body))
     except Exception as e:
         return Response(e.__str__())

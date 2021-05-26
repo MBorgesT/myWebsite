@@ -34,7 +34,6 @@ export default class PostListPage extends React.Component {
             let postStore = new PostStore();
             try {
                 data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
-                count = await postStore.getPostCount();
             } catch (e) {
                 console.log(e);
                 return;
