@@ -14,6 +14,11 @@ def index(request):
 
 
 @api_view(['POST'])
+def get_post_by_id(request):
+    return Response(business.get_post_by_id(request.body))
+
+
+@api_view(['POST'])
 def get_post_page(request):
     data = business.get_post_page(request.body)
     return Response(data)

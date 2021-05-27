@@ -1,12 +1,11 @@
 import React from 'react';
-import './Post.css';
+import './PostPreview.css';
 import { Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-
 const PREVIEW_SIZE = 350;
 
-class Post extends React.Component {
+export default class PostPreview extends React.Component {
     constructor(props) {
         super(props);
 
@@ -50,6 +49,3 @@ class Post extends React.Component {
         );
     }
 }
-
-
-export default Post;

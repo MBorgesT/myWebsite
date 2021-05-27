@@ -24,14 +24,14 @@ export default class PostListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.selectPage(1, null, this.props.match != null ? this.props.match.params.topicId : null);
+        this.selectPage(1, this.props.match != null ? this.props.match.params.topicId : null);
     }
 
     componentWillReceiveProps(nextProps) {
-        this.selectPage(1, null, nextProps.match.params.topicId);
+        this.selectPage(1, nextProps.match.params.topicId);
     }
 
-    async selectPage(pageIndex, scrollToRef, topicId) {
+    async selectPage(pageIndex, topicId) {
         let upperLimit = this.state.postListModel == null ? true : pageIndex <= this.state.postListModel.numberOfPages;
         if (upperLimit && pageIndex > 0) {
             const selectedTopic = topicId != null ? topicId : this.props.match.params.topicId;
@@ -62,10 +62,11 @@ export default class PostListPage extends React.Component {
                 postListModel: new PostListModel(data, count, pageIndex, numberOfPages)
             });
 
-            debugger;
-            if (scrollToRef != null) {
-                window.scrollTo(0, scrollToRef.current.offsetTop);
+            /*
+            if (refCurrent != null) {
+                window.scrollTo(0, refCurrent.offsetTop);
             }
+            */
         }
     }
 

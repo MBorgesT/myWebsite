@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '../post/Post';
+import PostPreview from '../post-preview/PostPreview';
 import './PostList.css'
 import MyPagination from '../pagination/MyPagination';
 
@@ -11,7 +11,7 @@ class PostList extends React.Component {
 		if (list) {
 			for (let i = 0; i < list.length; i++) {
 				elements.push(
-					<Post key={list[i].id} post={list[i]} />
+					<PostPreview key={list[i].id} post={list[i]} />
 				);
 				elements.push(<hr />);
 			}

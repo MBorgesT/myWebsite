@@ -8,8 +8,9 @@ import {
 	withRouter
 } from "react-router-dom";
 
-import PostListPage from './components/post-list-page/PostListPage';
 import Header from './components/header/Header';
+import PostListPage from './components/post-list-page/PostListPage';
+import PostDetailPage from './components/post-detail-page/PostDetailPage';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Switch>
 						<Route path='/' exact component={withRouter(PostListPage)} />
 						<Route path='/topic/:topicId' exact component={withRouter(PostListPage)} />
+						<Route path='/post/:postId' exact component={withRouter(PostDetailPage)} />
 					</Switch>
 				</Router>
 			</div>

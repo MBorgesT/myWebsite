@@ -3,6 +3,34 @@ from .serializers import PostSerializer
 import json
 
 
+def get_all():
+    all_posts = Post.objects.all().order_by('-date')
+    serializer = PostSerializer(all_posts, many=True)
+    return serializer.data
+
+
+def insert(request_body):
+    serializer = PostSerializer(data=request_body)
+
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        raise Exception(serializer.errors)
+
+    return serializer.data
+
+
+def get_post_by_id(request_body):
+    parsed_data = json.loads(request_body)
+
+    post_id = parsed_data['post_id']
+
+    post = Post.objects.get(pk=post_id)
+    serializer = PostSerializer(post, many=False)
+
+    return serializer.data
+
+
 def get_post_page(request_body):
     parsed_data = json.loads(request_body)
 
@@ -19,23 +47,6 @@ def get_post_page(request_body):
 
 def get_post_count():
     return Post.objects.all().count()
-
-
-def get_all():
-    all_posts = Post.objects.all().order_by('-date')
-    serializer = PostSerializer(all_posts, many=True)
-    return serializer.data
-
-
-def insert(request_body):
-    serializer = PostSerializer(data=request_body)
-
-    if serializer.is_valid():
-        serializer.save()
-    else:
-        raise Exception(serializer.errors)
-
-    return serializer.data
 
 
 def get_post_page_by_topic(request_body):

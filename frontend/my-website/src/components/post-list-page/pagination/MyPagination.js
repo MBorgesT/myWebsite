@@ -2,7 +2,7 @@ import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import './MyPagination.css';
 
-class MyPagination extends React.Component {
+export default class MyPagination extends React.Component {
 
     constructor(props) {
         super(props);
@@ -11,7 +11,8 @@ class MyPagination extends React.Component {
     }
 
     selectPage(pageIndex) {
-        this.props.selectPage(pageIndex, this.paginationRef, null);
+        this.props.selectPage(pageIndex, this.paginationRef.current, null);
+        //this.paginationRef.current.scrollIntoView();
     }
 
     render() {
@@ -137,5 +138,3 @@ class MyPagination extends React.Component {
     }
 
 }
-
-export default MyPagination;
