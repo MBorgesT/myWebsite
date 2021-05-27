@@ -10,10 +10,7 @@ def index(request):
         return Response(business.get_all())
 
     elif request.method == 'POST':
-        try:
-            return Response(business.insert(request.data))
-        except Exception as e:
-            return Response(e.__str__())
+        return Response(business.insert(request.data))
 
 
 @api_view(['POST'])
@@ -24,10 +21,7 @@ def get_post_page(request):
 
 @api_view(['GET'])
 def get_post_count(request):
-    try:
-        return Response(business.get_post_count())
-    except Exception as e:
-        return Response(e.__str__())
+    return Response(business.get_post_count())
 
 
 @api_view(['POST'])
