@@ -45,5 +45,17 @@ export default class PostListStore extends AbstractStore {
 			throw e;
 		}
 	}
+	
+	async getPostCountByTopic(topicId) {
+		try {
+			const promise = await axios.post( this.apiUrl + 'get_post_count_by_topic/', {
+				topic_id: topicId
+			})
+			const data = promise.data;
+			return data;
+		} catch (e) {
+			throw e;
+		}
+	}
 
 }

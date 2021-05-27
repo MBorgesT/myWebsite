@@ -17,7 +17,8 @@ export default class PostListPage extends React.Component {
 
         this.state = {
             postsPerPage: 6,
-            postListModel: null
+            postListModel: null,
+            topicId: parseInt(props.match.params.topicId)
         };
 
         this.selectPage = this.selectPage.bind(this);
@@ -33,7 +34,13 @@ export default class PostListPage extends React.Component {
             let data, count;
             let postStore = new PostStore();
             try {
-                data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
+                if (this.state.topicId != null && this.state.topicId > 0) {
+                    data = await postStore.getPostPageByTopic(this.state.topicId, this.state.postsPerPage, pageIndex);
+                    count = await postStore.getPostCountByTopic(this.state.topicId);
+                } else {
+                    data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
+                    count = await postStore.getPostCount();
+                }
             } catch (e) {
                 console.log(e);
                 return;
@@ -73,7 +80,7 @@ export default class PostListPage extends React.Component {
                             {content}
                         </Col>
                         <Col>
-                            <SideColumn />
+                            <SideColumn topicId={this.state.topicId} />
                         </Col>
                     </Row>
                 </Container>

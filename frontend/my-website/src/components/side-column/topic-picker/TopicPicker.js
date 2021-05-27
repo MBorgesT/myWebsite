@@ -35,18 +35,23 @@ export default class TopicPicker extends React.Component {
                 <ListGroup.Item
                     action
                     id={-1}
+                    href='/'
+                    active={isNaN(this.props.topicId)}
                 >
                     All
                 </ListGroup.Item>
             );
 
-            for (let i = 0; i < this.state.topics.length; i++) {
+            let topics = this.state.topics;
+            for (let i = 0; i < topics.length; i++) {
                 elements.push(
                     <ListGroup.Item
                         action
-                        id={this.state.topics[i].id}
+                        id={topics[i].id}
+                        href={'/topic/' + topics[i].id}
+                        active={this.props.topicId == topics[i].id}
                     >
-                        {this.state.topics[i].name}
+                        {topics[i].name}
                     </ListGroup.Item>
                 );
             }

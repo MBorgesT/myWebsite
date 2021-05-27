@@ -13,7 +13,7 @@ export default class SideColumn extends React.Component {
             <div className='component'>
                 <AboutMe />
                 <Contact />
-                <TopicPicker />
+                <TopicPicker topicId={this.props.topicId} />
             </div>
         );
     }
