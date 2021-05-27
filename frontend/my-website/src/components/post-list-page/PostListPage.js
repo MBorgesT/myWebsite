@@ -34,6 +34,8 @@ export default class PostListPage extends React.Component {
     async selectPage(pageIndex, scrollToRef, topicId) {
         let upperLimit = this.state.postListModel == null ? true : pageIndex <= this.state.postListModel.numberOfPages;
         if (upperLimit && pageIndex > 0) {
+            const selectedTopic = topicId != null ? topicId : this.props.match.params.topicId;
+
             this.setState({
                 postsPerPage: this.state.postsPerPage,
                 postListModel: null
@@ -42,9 +44,9 @@ export default class PostListPage extends React.Component {
             let data, count;
             let postStore = new PostStore();
             try {
-                if (topicId != null && topicId > 0) {
-                    data = await postStore.getPostPageByTopic(topicId, this.state.postsPerPage, pageIndex);
-                    count = await postStore.getPostCountByTopic(topicId);
+                if (selectedTopic != null && selectedTopic > 0) {
+                    data = await postStore.getPostPageByTopic(selectedTopic, this.state.postsPerPage, pageIndex);
+                    count = await postStore.getPostCountByTopic(selectedTopic);
                 } else {
                     data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
                     count = await postStore.getPostCount();
@@ -60,6 +62,7 @@ export default class PostListPage extends React.Component {
                 postListModel: new PostListModel(data, count, pageIndex, numberOfPages)
             });
 
+            debugger;
             if (scrollToRef != null) {
                 window.scrollTo(0, scrollToRef.current.offsetTop);
             }

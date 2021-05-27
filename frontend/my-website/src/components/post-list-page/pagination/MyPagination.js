@@ -11,7 +11,7 @@ class MyPagination extends React.Component {
     }
 
     selectPage(pageIndex) {
-        this.props.selectPage(pageIndex, this.paginationRef);
+        this.props.selectPage(pageIndex, this.paginationRef, null);
     }
 
     render() {

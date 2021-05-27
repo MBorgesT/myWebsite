@@ -8,10 +8,6 @@ import './SideColumn.css';
 
 export default class SideColumn extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className='component'>
