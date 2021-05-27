@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { ListGroup } from 'react-bootstrap';
 
 import TopicStore from '../../../stores/TopicStore';
@@ -32,27 +34,30 @@ export default class TopicPicker extends React.Component {
         let elements = []
         if (this.state != null && this.state.topics != null) {
             elements.push(
-                <ListGroup.Item
-                    action
-                    id={-1}
-                    href='/'
-                    active={isNaN(this.props.topicId)}
-                >
-                    All
-                </ListGroup.Item>
+                <Link to='/'>
+                    <ListGroup.Item
+                        action
+                        id={-1}
+                        active={this.props.selectedTopic == null}
+                    >
+                        All
+                    </ListGroup.Item>
+                </Link>
             );
 
             let topics = this.state.topics;
             for (let i = 0; i < topics.length; i++) {
+                let url = '/topic/' + topics[i].id;
                 elements.push(
-                    <ListGroup.Item
-                        action
-                        id={topics[i].id}
-                        href={'/topic/' + topics[i].id}
-                        active={this.props.topicId == topics[i].id}
-                    >
-                        {topics[i].name}
-                    </ListGroup.Item>
+                    <Link to={url}>
+                        <ListGroup.Item
+                            action
+                            id={topics[i].id}
+                            active={parseInt(this.props.selectedTopic) === parseInt(topics[i].id)}
+                        >
+                            {topics[i].name}
+                        </ListGroup.Item>
+                    </Link>
                 );
             }
         }

@@ -8,12 +8,16 @@ import './SideColumn.css';
 
 export default class SideColumn extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div className='component'>
                 <AboutMe />
                 <Contact />
-                <TopicPicker topicId={this.props.topicId} />
+                <TopicPicker selectedTopic={this.props.topicId} />
             </div>
         );
     }

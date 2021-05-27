@@ -17,26 +17,34 @@ export default class PostListPage extends React.Component {
 
         this.state = {
             postsPerPage: 6,
-            postListModel: null,
-            topicId: parseInt(props.match.params.topicId)
+            postListModel: null
         };
 
         this.selectPage = this.selectPage.bind(this);
     }
 
     componentDidMount() {
-        this.selectPage(1);
+        this.selectPage(1, null, this.props.match != null ? this.props.match.params.topicId : null);
     }
 
-    async selectPage(pageIndex, scrollToRef) {
+    componentWillReceiveProps(nextProps) {
+        this.selectPage(1, null, nextProps.match.params.topicId);
+    }
+
+    async selectPage(pageIndex, scrollToRef, topicId) {
         let upperLimit = this.state.postListModel == null ? true : pageIndex <= this.state.postListModel.numberOfPages;
         if (upperLimit && pageIndex > 0) {
+            this.setState({
+                postsPerPage: this.state.postsPerPage,
+                postListModel: null
+            })
+
             let data, count;
             let postStore = new PostStore();
             try {
-                if (this.state.topicId != null && this.state.topicId > 0) {
-                    data = await postStore.getPostPageByTopic(this.state.topicId, this.state.postsPerPage, pageIndex);
-                    count = await postStore.getPostCountByTopic(this.state.topicId);
+                if (topicId != null && topicId > 0) {
+                    data = await postStore.getPostPageByTopic(topicId, this.state.postsPerPage, pageIndex);
+                    count = await postStore.getPostCountByTopic(topicId);
                 } else {
                     data = await postStore.getPostPage(this.state.postsPerPage, pageIndex);
                     count = await postStore.getPostCount();
@@ -48,6 +56,7 @@ export default class PostListPage extends React.Component {
 
             const numberOfPages = Math.floor(count / this.state.postsPerPage) + 1;
             this.setState({
+                postsPerPage: this.state.postsPerPage,
                 postListModel: new PostListModel(data, count, pageIndex, numberOfPages)
             });
 
@@ -80,7 +89,7 @@ export default class PostListPage extends React.Component {
                             {content}
                         </Col>
                         <Col>
-                            <SideColumn topicId={this.state.topicId} />
+                            <SideColumn topicId={this.props.match.params.topicId} />
                         </Col>
                     </Row>
                 </Container>

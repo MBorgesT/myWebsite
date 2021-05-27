@@ -5,7 +5,7 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	withRouter
 } from "react-router-dom";
 
 import PostListPage from './components/post-list-page/PostListPage';
@@ -18,8 +18,8 @@ function App() {
 			<div className='content'>
 				<Router>
 					<Switch>
-						<Route path='/' exact component={PostListPage} />
-						<Route path='/topic/:topicId' exact component={PostListPage} />
+						<Route path='/' exact component={withRouter(PostListPage)} />
+						<Route path='/topic/:topicId' exact component={withRouter(PostListPage)} />
 					</Switch>
 				</Router>
 			</div>
